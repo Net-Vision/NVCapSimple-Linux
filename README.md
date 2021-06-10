@@ -1,4 +1,16 @@
-To build:
+# NVCapSimple_Linux
+
+NVCapSimple is a simple example of capture (preview) software for our "SV series" board and other UVC camera.
+This software supports "UYVY" and "YUY2" frame format, but other formats such as MJPG and RGB are not supported.
+
+This example uses v4l2 driver to capture "raw" data of UYVY format and uses OpenCV to display video.
+
+It includes another example to show "RAW10/RAW12 on UYVY" video with converting to monochrome.
+
+# OS
+Ubuntu 18.04 LTS (64 bit)
+
+# Build
 
 At first, install v4l-utils etc.
 1.	sudo apt-get install v4l-utils cmake libx11-dev
@@ -31,3 +43,17 @@ Then build
 1.	cd build
 2.	cmake .. .
 3.	make
+
+# Usage
+NVCapSimple_YUV: show YUV video.
+NVCapSimple_RAW10: show RAW10 video in grayscale.
+NVCapSimple_RAW12: show RAW12 video in grayscale.
+
+To open device 1 (/dev/video1),
+---bash
+./NVCapSimple_YUV 1
+---
+
+Press key 'q' to quit.
+Press key 'i' to toggle info text.
+
