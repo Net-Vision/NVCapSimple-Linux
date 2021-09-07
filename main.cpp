@@ -11,10 +11,10 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 
-#include "V4LCapture.h"
+#include "V4LCapture_Min.h"
 #include "CommandParser.h"
 
-#include "UVCManager.h"
+#include "UVCManager_Min.h"
 #include "FrameConverter.h"
 
 
@@ -253,6 +253,10 @@ int Mainloop(sMainLoopParam* pParam, int camCnt, int options)
 				if(1){
 					if(timedOut & (1<<i)){
 						strcpy(buf2, "Error: timed out");
+						// Open Device Again
+						int ret = capSub[i]->ReOpen();
+						if(ret) printf("ReInit failed./n");
+						else printf("Reinit ok\n");
 					}else{
 						sprintf(buf2, "%dx%d, %s, frame = %d, FPS = %.1f",
 							videoFormat[i].width, videoFormat[i].height,

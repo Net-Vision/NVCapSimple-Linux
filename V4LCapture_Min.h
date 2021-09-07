@@ -3,8 +3,8 @@
 // https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/v4l2.html
 // [18/03/03] Updated for adjusting time-out and buffer size
 
-#ifndef _V4L_CAPTURE_H_
-#define _V4L_CAPTURE_H_
+#ifndef _V4L_CAPTURE_MIN_H_
+#define _V4L_CAPTURE_MIN_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,6 +48,8 @@ public:
 		int width, int height,
 		unsigned int timeout, unsigned int queueSize);
 
+	int ReOpen(void);
+
 	// Capture 1 frame
 	int CaptureFrame(unsigned char* buf, uint32_t bufSize, uint32_t* pSequence = NULL);
 	int GetVideoFormat(sVideoFormat* pFmt);
@@ -57,6 +59,7 @@ public:
 private:
 	unsigned int m_timeout;
 	int m_fd, m_id;
+	int m_width, m_height;
 	int m_initialized;
 	char m_deviceName[128];
 

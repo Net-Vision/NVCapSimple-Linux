@@ -19,7 +19,7 @@
 #include <linux/uvcvideo.h>
 #include <linux/usb/video.h>
 
-#include "UVCManager.h"
+#include "UVCManager_Min.h"
 
 CUVCManager::CUVCManager(){
 	m_fd = 0;

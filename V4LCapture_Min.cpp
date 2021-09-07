@@ -2,7 +2,7 @@
 // To see detail of Video for Linux API, see
 // https://linuxtv.org/downloads/v4l-dvb-apis/uapi/v4l/v4l2.html
 
-#include "V4LCapture.h"
+#include "V4LCapture_Min.h"
 
 #include <sys/time.h>
 #include <unistd.h>
@@ -123,7 +123,6 @@ void CV4LCapture::CloseDevice(void)
 
 	if(m_fd > 0) close(m_fd);
 }
-
 void CV4LCapture::InitMmap(char* dev_name, int reqCount)
 {
 	struct v4l2_requestbuffers req;
@@ -176,6 +175,11 @@ void CV4LCapture::InitMmap(char* dev_name, int reqCount)
 	}
 }
 
+int CV4LCapture::ReOpen(void)
+{
+	return Init(m_id, m_width, m_height);
+}
+
 int CV4LCapture::Init(int id, int width, int height)
 {
 	return Init(id, width, height, TIMEOUT_SEC, REQ_COUNT);
@@ -189,7 +193,14 @@ int CV4LCapture::Init(int id,
 	struct v4l2_crop crop;
 	struct v4l2_format fmt;
 	
+	if(m_initialized){
+		StopCapture();
+		CloseDevice();
+	}
+
 	m_id = id;
+	m_width = width;
+	m_height = height;
 
 	char dev_name[128];
 	sprintf(dev_name, "/dev/video%d", id);

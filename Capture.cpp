@@ -2,7 +2,7 @@
 #include "main.h"
 #include "Capture.h"
 
-#include "UVCManager.h"
+#include "UVCManager_Min.h"
 #include "FrameConverter.h"
 
 //#include "UserFilter.h"

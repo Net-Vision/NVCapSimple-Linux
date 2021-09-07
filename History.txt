@@ -8,4 +8,6 @@
 - Supported Y8, Y10, Y12 format
 - Supported Monochrome
 
+[21/09/07]
+- Open device again after timeout detected
 
